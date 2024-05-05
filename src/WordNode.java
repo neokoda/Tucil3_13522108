@@ -1,21 +1,29 @@
-public class WordNode implements Comparable<WordNode> {
-    private String word;
-    private int cost;
+    import java.util.ArrayList;
 
-    public WordNode(String word, int cost) {
-        this.word = word;
-        this.cost = cost;
-    }
+    public class WordNode implements Comparable<WordNode> {
+        private String word;
+        private ArrayList<String> path;
+        private int cost;
 
-    public String getWord() {
-        return word;
-    }
+        public WordNode(String word, ArrayList<String> path, int cost) {
+            this.word = word;
+            this.path = path;
+            this.cost = cost;
+        }
 
-    public int getCost() {
-        return cost;
-    }
+        public String getWord() {
+            return word;
+        }
 
-    public int compareTo(WordNode otherWord) {
-        return Integer.compare(this.cost, otherWord.cost);
+        public ArrayList<String> getPath() {
+            return path;
+        }
+
+        public int getCost() {
+            return cost;
+        }
+
+        public int compareTo(WordNode otherWord) {
+            return Integer.compare(this.cost, otherWord.cost);
+        }
     }
-}

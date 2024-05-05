@@ -1,24 +1,19 @@
 import java.util.HashSet;
-import java.util.HashMap;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.PriorityQueue;
 
 class PathFinder {
     private HashSet<String> visited;
     private PriorityQueue<WordNode> wordQueue;
-    private HashMap<String, String> predecessors;
 
     public PathFinder() {
         visited = new HashSet<>();
         wordQueue = new PriorityQueue<>();
-        predecessors = new HashMap<>();
     }
 
     public void resetPathFinder() {
         visited.clear();
         wordQueue.clear();
-        predecessors.clear();
     }
 
     public int countCharacterDiff(String word1, String word2) {
@@ -60,23 +55,22 @@ class PathFinder {
         for (String childWord : dictset.getDict()) {
             if (isChildWord(parent.getWord(), childWord)) {
                 WordNode childNode;
+                ArrayList<String> newPath = new ArrayList<>(parent.getPath());
+                newPath.add(parent.getWord());
+
                 switch (method) {
                     case "UCS":
-                        childNode = new WordNode(childWord, parent.getCost() + 1);
+                        childNode = new WordNode(childWord, newPath, newPath.size());
                         childNodes.add(childNode);
                         break;
                     case "GBFS":
-                        childNode = new WordNode(childWord, countCharacterDiff(childWord, endWord));
+                        childNode = new WordNode(childWord, newPath, countCharacterDiff(childWord, endWord));
                         childNodes.add(childNode);
                         break;
                     case "A*":
-                        childNode = new WordNode(childWord, countCharacterDiff(childWord, endWord) + parent.getCost() + 1);
+                        childNode = new WordNode(childWord, newPath, newPath.size() + countCharacterDiff(childWord, endWord));
                         childNodes.add(childNode);
                         break;
-                }
-
-                if (!predecessors.containsKey(childWord)) {
-                    predecessors.put(childWord, parent.getWord());
                 }
             }
         }
@@ -84,24 +78,13 @@ class PathFinder {
         return childNodes;
     }
 
-    public ArrayList<String> getPath(String endWord) {
-        ArrayList<String> path = new ArrayList<>();
-
-        String word = endWord;
-        while (word != "") {
-            path.add(word);
-            word = predecessors.get(word);
-        }
-        Collections.reverse(path);
-        
-        return path;
-    }
-
     public ArrayList<String> findPath(String startWord, String endWord, DictSet dictset, String method) {
+        resetPathFinder();
         ArrayList<String> path = new ArrayList<>();
 
-        WordNode startNode = new WordNode(startWord, 0);
-        predecessors.put(startWord, "");
+        ArrayList<String> startPath = new ArrayList<>();
+        WordNode startNode = new WordNode(startWord, startPath, 0); 
+
         wordQueue.add(startNode);
         visited.add(startNode.getWord());
 
@@ -111,8 +94,8 @@ class PathFinder {
             ArrayList<WordNode> childNodes = findChildNodes(wordNode, endWord, dictset, method);
             for (WordNode childNode : childNodes) {
                 if (childNode.getWord().equals(endWord)) {
-                    path = getPath(endWord);
-                    resetPathFinder();
+                    path = childNode.getPath();
+                    path.add(endWord);
                     return path;
                 }
                 if (!visited.contains(childNode.getWord())) {
@@ -123,7 +106,6 @@ class PathFinder {
             childNodes.clear();
         }
 
-        resetPathFinder();
         return path;
     }
 }

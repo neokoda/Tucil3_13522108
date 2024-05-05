@@ -8,16 +8,16 @@ public class Main {
         PathFinder pf = new PathFinder();
         ArrayList<String> path;
 
-        String startWord = "rotation";
-        String endWord = "forklift";
+        String startWord = "sound";
+        String endWord = "plays";
         
         path = pf.findPath(startWord, endWord, dictset, "UCS");
-        System.out.println(path);
+        System.out.println(path + " " + path.size());
 
         path = pf.findPath(startWord, endWord, dictset, "GBFS");
-        System.out.println(path);
+        System.out.println(path + " " + path.size());
 
         path = pf.findPath(startWord, endWord, dictset, "A*");
-        System.out.println(path);
+        System.out.println(path + " " + path.size());
     }
 }

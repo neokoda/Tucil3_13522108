@@ -50,12 +50,10 @@ public class GUI extends JFrame implements ActionListener {
             outputArea.setText("Invalid input. Words are not in dictionary.");
             showResults = false;
         }
-
         if (startWord.length() != endWord.length()) {
             outputArea.setText("Invalid input. Words are of different length.");
             showResults = false;
         }
-
         if (!(mode.equals("UCS") || mode.equals("GBFS") || mode.equals("A*"))) {
             outputArea.setText("Invalid mode. Please enter UCS, GBFS, or A*.");
             showResults = false;
@@ -63,14 +61,17 @@ public class GUI extends JFrame implements ActionListener {
 
         PathFinder pf = new PathFinder();
 
-        long startTime = System.currentTimeMillis();
-
         if (showResults) {
+            long startTime = System.currentTimeMillis();
             pf.findPath(startWord, endWord, dictset, mode);
             long endTime = System.currentTimeMillis();
             long executionTime = endTime - startTime;
 
-            outputArea.setText("Path: " + pf.getResultPath() + "\n");
+            if (pf.getResultPath().size() == 0) {
+                outputArea.setText("No path was found between start word and end word.\n");
+            } else {
+                outputArea.setText("Path: " + pf.getResultPath() + "\n");
+            }
             outputArea.append("Nodes visited: " + pf.getNumVisited() + "\n");
             outputArea.append("Execution time: " + executionTime + " ms");
         }

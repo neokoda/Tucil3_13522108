@@ -92,6 +92,11 @@ class PathFinder {
     public void findPath(String startWord, String endWord, DictSet dictset, String method) {
         resetPathFinder();
 
+        if (startWord.equals(endWord)) {
+            resultPath.add(startWord);
+            return;
+        }
+
         ArrayList<String> startPath = new ArrayList<>();
         WordNode startNode = new WordNode(startWord, startPath, 0); 
 

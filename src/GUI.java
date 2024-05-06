@@ -53,7 +53,7 @@ public class GUI extends JFrame implements ActionListener {
         boolean showResults = true;
 
         DictSet dictset = new DictSet();
-        dictset.loadDictFromFile("src/dictionary.txt");
+        dictset.loadDictFromFile("../src/dictionary.txt");
 
         if (!dictset.getDict().contains(startWord) || !dictset.getDict().contains(endWord)) {
             outputArea.setText("Invalid input. Words are not in dictionary.");

@@ -14,16 +14,20 @@ public class GUI extends JFrame implements ActionListener {
         setLayout(new BorderLayout());
 
         JPanel inputPanel = new JPanel(new GridLayout(4, 2));
+
         inputPanel.add(new JLabel("Start Word:"));
         startWordField = new JTextField();
+        startWordField.setFont(new Font("Arial", Font.PLAIN, 20));
         inputPanel.add(startWordField);
 
         inputPanel.add(new JLabel("End Word:"));
         endWordField = new JTextField();
+        endWordField.setFont(new Font("Arial", Font.PLAIN, 20));
         inputPanel.add(endWordField);
 
         inputPanel.add(new JLabel("Mode (UCS, GBFS, A*):"));
         modeField = new JTextField();
+        modeField.setFont(new Font("Arial", Font.PLAIN, 20));
         inputPanel.add(modeField);
 
         JButton findButton = new JButton("Find Path");
@@ -34,6 +38,8 @@ public class GUI extends JFrame implements ActionListener {
 
         outputArea = new JTextArea();
         add(new JScrollPane(outputArea), BorderLayout.CENTER);
+        outputArea.setFont(new Font("Arial", Font.PLAIN, 20));
+        outputArea.setLineWrap(true);
     }
 
     public void actionPerformed(ActionEvent e) {

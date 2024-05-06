@@ -43,6 +43,9 @@ public class GUI extends JFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
+        Runtime runtime = Runtime.getRuntime();
+        runtime.gc();
+
         String startWord = startWordField.getText().toLowerCase();
         String endWord = endWordField.getText().toLowerCase();
         String mode = modeField.getText().toUpperCase();
@@ -79,7 +82,10 @@ public class GUI extends JFrame implements ActionListener {
                 outputArea.setText("Path: " + pf.getResultPath() + "\n");
             }
             outputArea.append("Nodes visited: " + pf.getNumVisited() + "\n");
-            outputArea.append("Execution time: " + executionTime + " ms");
+            outputArea.append("Execution time: " + executionTime + " ms\n");
+
+            long memoryUsed = runtime.totalMemory() - runtime.freeMemory();
+            outputArea.append("Memory used: " + memoryUsed / 1024.0 + " kilobytes\n");
         }
     }
 }

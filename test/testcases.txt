@@ -1,0 +1,9 @@
+- Format: startWord - endWord
+
+Test cases:
+1. fOuR - CrOp
+2. river - month
+3. TABLET - RHYTHM
+4. pet - ham
+5. grease - remote
+6. black - store

@@ -24,11 +24,17 @@ Untuk menjalankan program, pindah ke *bin* terlebih dahulu dengan mengetik perin
 ```
 cd bin
 ```
-Lalu, jalankan program dengan mengetik perintah:
+Jika ingin memakai mode GUI, jalankan program dengan mengetik perintah:
 ```
 java Main
 ```
 Tampilan GUI program akan muncul di layar. Masukkan kata awal, kata akhir, dan metode pencarian yang diinginkan dan tekan tombol "Find Path" untuk mendapatkan jalur dari kata awal hingga kata akhir.
+
+Jika ingin memakai mode CLI, jalankan program dengan mengetik perintah:
+```
+java CLI
+```
+Masukkan kata awal, kata akhir, dan metode pencarian yang diinginkan pada terminal untuk mendapatkan jalur dari kata awal hingga kata akhir.
 
 ## Identitas Pembuat
 - Nama : Muhammad Neo Cicero Koda
